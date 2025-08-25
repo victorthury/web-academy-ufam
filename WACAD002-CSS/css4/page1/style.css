@@ -1,0 +1,40 @@
+.container #red {
+  grid-area: red;
+  background-color: red;
+}
+
+.container #blue {
+  grid-area: blue;
+  background: blue;
+}
+
+.container #green {
+  grid-area: green;
+  background-color: green;
+}
+
+.container #purple {
+  grid-area: purple;
+  background-color: purple;
+}
+
+.container #orange {
+  grid-area: orange;
+  background-color: orange;
+}
+
+.container {
+  display: grid;
+  /* grid-template-columns: repeat(4, 1fr); */
+  /* grid-template-rows: repeat(3, 1fr); */
+  grid-template-areas:
+    "red red blue blue"
+    "green purple purple purple"
+    "orange orange orange orange";
+  gap: 16px;
+  height: 400px;
+}
+
+.container > * {
+  border-radius: 8px;
+}
