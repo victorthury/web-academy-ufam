@@ -198,28 +198,11 @@ if (color === "azul") {
   );
 }
 
-function getRandomColor(color) {
-  let r = 0;
-  let g = 0;
-  let b = 0;
-
-  intensidade = 0.3 + Math.random() * 0.7;
-
-  if (color === "azul") {
-    b = 255 * intensidade;
-  } else if (color === "verde") {
-    g = 255 * intensidade;
-  } else {
-    r = 255 * intensidade;
-  }
-  return "rgb(" + r + "," + g + "," + b + ")";
-}
-
 function randomHsl(color) {
   let baseHue;
   if (color === "azul") {
     baseHue = 240;
-  } else if (baseHue === "verde") {
+  } else if (color === "verde") {
     baseHue = 120;
   } else {
     baseHue = 0;
