@@ -1,0 +1,26 @@
+<body>
+  <h1>Lista</h1>
+
+  <div>
+    <p id="lista-titulo" name="lista">Meus itens:</p>
+  </div>
+
+  <ul id="lista-itens-1">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <script>
+    const listaItens1 = document.getElementById("lista-itens-1");
+    console.log(
+      "i) Imprima no console o primeiro e último filho elementos HTML da lista-itens-1"
+    );
+
+    const firstElementChild = listaItens1.firstElementChild;
+    const lastElementChild = listaItens1.lastElementChild;
+    console.log(firstElementChild);
+    console.log(lastElementChild);
+  </script>
+</body>

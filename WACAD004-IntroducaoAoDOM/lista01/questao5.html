@@ -1,0 +1,45 @@
+<body>
+  <h1>Listas</h1>
+
+  <p id="lista-titulo" name="lista">Minhas listas:</p>
+
+  <ul class="lista-itens-1">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-2">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-3">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <ul class="lista-itens-4">
+    <li id="one" class="hot">item a</li>
+    <li id="two" class="hot">item b</li>
+    <li id="three" class="hot">item c</li>
+    <li id="four">item d</li>
+  </ul>
+
+  <script>
+    const lista2 = document.querySelectorAll(".lista-itens-2 li");
+    for (item of lista2) {
+      item.style.setProperty("color", "red");
+    }
+
+    const lista2Hot = document.querySelectorAll(".lista-itens-2 .hot");
+    for (item of lista2Hot) {
+      item.classList.replace("hot", "cold");
+    }
+  </script>
+</body>
