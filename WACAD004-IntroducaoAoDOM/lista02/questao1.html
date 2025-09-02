@@ -22,5 +22,24 @@
     const lastElementChild = listaItens1.lastElementChild;
     console.log(firstElementChild);
     console.log(lastElementChild);
+
+    console.log("ii) Imprima no console o elemento HTML pai da lista-itens-1;");
+    console.log(listaItens1.parentElement);
+
+    console.log(
+      "iii) Imprima no console os irmãos elemento HTML do item com id = ‘three’"
+    );
+    const three = document.getElementById("three");
+    threeNextSibling = three.nextElementSibling;
+    while (threeNextSibling) {
+      console.log(threeNextSibling);
+      threeNextSibling = threeNextSibling.nextElementSibling;
+    }
+
+    threePreviousSibling = three.previousElementSibling;
+    while (threePreviousSibling) {
+      console.log(threePreviousSibling);
+      threePreviousSibling = threePreviousSibling.previousElementSibling;
+    }
   </script>
 </body>
