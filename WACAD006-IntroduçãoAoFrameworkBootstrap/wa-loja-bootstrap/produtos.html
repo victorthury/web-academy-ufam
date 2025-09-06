@@ -20,12 +20,15 @@
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-targ
+          data-bs-target="navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="./index.html">
                 Inicio
@@ -36,8 +39,8 @@
                 Gerenciar Produtos
               </a>
             </li>
-            <button type="button" class="btn btn-secondary">Sair</button>
           </ul>
+          <button type="button" class="btn btn-secondary">Sair</button>
         </div>
       </div>
     </nav>
@@ -73,7 +76,7 @@
               <tr>
                 <th scope="row">1</th>
                 <td>Bicicleta</td>
-                <td>R$1.000,00</td>
+                <td>R$ 1.000,00</td>
                 <td>110</td>
                 <td>
                   <div class="gap-3">
@@ -83,9 +86,9 @@
                 </td>
               </tr>
               <tr>
-                <th scope="row">1</th>
+                <th scope="row">2</th>
                 <td>Echo dot</td>
-                <td>R$600,00</td>
+                <td>R$ 600,00</td>
                 <td>8</td>
                 <td>
                   <div class="gap-3">
@@ -95,9 +98,9 @@
                 </td>
               </tr>
               <tr>
-                <th scope="row">1</th>
+                <th scope="row">3</th>
                 <td>Celular</td>
-                <td>R$1.500,00</td>
+                <td>R$ 1.500,00</td>
                 <td>10</td>
                 <td>
                   <div class="gap-3">
@@ -107,9 +110,9 @@
                 </td>
               </tr>
               <tr>
-                <th scope="row">1</th>
+                <th scope="row">4</th>
                 <td>Umidificador</td>
-                <td>R$100,00</td>
+                <td>R$ 100,00</td>
                 <td class="text-danger fw-bold">0</td>
                 <td>
                   <div class="gap-3">
@@ -122,7 +125,7 @@
           </table>
         </div>
         <div class="modal fade" id="exampleModal">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5">Novo produto</h1>
@@ -135,30 +138,42 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <label for="product" class="form-label">Produto</label>
-                  <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    id="product"
-                    aria-describedby="product"
-                    required
-                  />
-                  <label for="price" class="form-label">Preço</label>
-                  <input
-                    type="number"
-                    class="form-control form-control-lg"
-                    id="price"
-                    aria-describedby="price"
-                    required
-                  />
-                  <label for="stock" class="form-label">Estoque</label>
-                  <input
-                    type="number"
-                    class="form-control form-control-lg"
-                    id="stock"
-                    aria-describedby="stock"
-                    required
-                  />
+                  <div class="mb-2">
+                    <label for="product" class="form-label">Produto</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="product"
+                      aria-describedby="product"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="price" class="form-label">Preço</label>
+                    <div class="input-group">
+                      <span class="input-group-text" id="priceCurrency">
+                        R$
+                      </span>
+                      <input
+                        type="number"
+                        class="form-control form-control-lg"
+                        id="price"
+                        aria-describedby="priceCurrency"
+                        required
+                      />
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="stock" class="form-label">Estoque</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="stock"
+                      aria-describedby="stock"
+                      required
+                    />
+                  </div>
                   <button type="submit" class="btn btn-success w-100 d-block">
                     Confirmar Cadastro
                   </button>
