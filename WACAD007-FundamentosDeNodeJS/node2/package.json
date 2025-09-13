@@ -1,0 +1,19 @@
+{
+  "name": "node1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "primeiro exercício",
+  "main": "main.js",
+  "scripts": {
+    "start": "NODE_ENV=development npx nodemon ./src/main.js",
+    "start:prod": "NODE_ENV=production node ./src/main.js"
+  },
+  "author": "Victor Thury",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
