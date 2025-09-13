@@ -1,0 +1,14 @@
+{
+  "name": "exemplo",
+  "version": "1.0.0",
+  "description": "exemplo de aula",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Thury",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
