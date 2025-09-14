@@ -1,0 +1,45 @@
+body {
+  background-color: #dedfe4;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+label,
+input,
+button {
+  font-size: 18px;
+}
+
+input[type="number"] {
+  width: 60px;
+  text-align: center;
+  padding: 5px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 6px 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+p {
+  text-align: justify;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "node3",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "node3",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "npx nodemon ./src/main.js"
+  },
+  "author": "Victor Thury",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "lorem-ipsum": "^2.0.8"
+  }
+}
