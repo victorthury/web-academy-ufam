@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="py-5">
+      <div class="container">
+        <h5 class="mb-4">Lembretes</h5>
+        <div class="mb-2 d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-warning ms-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Novo lembrete
+          </button>
+        </div>
+        <div
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3"
+          id="cardsContainer"
+        ></div>
+        <div class="modal fade" id="exampleModal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Novo Lembrete</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="title" class="form-label">Título</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="title"
+                      aria-describedby="title"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="dueDate" class="form-label">Data limite</label>
+                    <div class="input-group">
+                      <input
+                        type="date"
+                        class="form-control form-control-lg"
+                        id="dueDate"
+                        aria-describedby="dueDate"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="description" class="form-label">
+                      Descrição
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="description"
+                      aria-describedby="description"
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 d-block">
+                    Confirmar Cadastro
+                  </button>
+                </form>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Editar -->
+        <div class="modal fade" id="editModal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Editar Lembrete</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="editForm">
+                  <div class="mb-2">
+                    <label for="editTitle" class="form-label">Título</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="editTitle"
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="editDueDate" class="form-label"
+                      >Data limite</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control form-control-lg"
+                      id="editDueDate"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="editDescription" class="form-label"
+                      >Descrição</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="editDescription"
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 d-block">
+                    Salvar Alterações
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../dist/lembretes.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
