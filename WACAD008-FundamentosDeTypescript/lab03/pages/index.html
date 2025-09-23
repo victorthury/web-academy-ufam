@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loja WA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="py-5">
+      <div class="container">
+        <h2 class="mb-4">Loja do Moisés</h2>
+        <div class="mb-2">
+          <button
+            type="button"
+            class="btn btn-primary ms-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#modalTv"
+          >
+            Adicionar TV
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary ms-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#modalBicicleta"
+          >
+            Adicionar Bicicleta
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary ms-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCelular"
+          >
+            Adicionar Celular
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <h4>Estatísticas</h4>
+          <ul class="list-group" id="statsList"></ul>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped" id="table">
+            <thead>
+              <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Valor (R$)</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- gerenciar produtos -->
+
+        <!-- modal cadastrar produtos -->
+
+        <div class="modal fade" id="modalTv">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Nova TV</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="modeloTv" class="form-label">Modelo</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="modeloTv"
+                      aria-describedby="modeloTv"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="fabricanteTv" class="form-label">
+                      Fabricante
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="fabricanteTv"
+                      aria-describedby="fabricanteTv"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="priceTv" class="form-label">Preço</label>
+                    <div class="input-group">
+                      <span class="input-group-text" id="priceTvCurrency">
+                        R$
+                      </span>
+                      <input
+                        type="number"
+                        class="form-control form-control-lg"
+                        id="priceTv"
+                        aria-describedby="priceTvCurrency"
+                        required
+                      />
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="mb-2">
+                    <label for="resolução" class="form-label">
+                      Resolução
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="resolução"
+                      aria-describedby="resolução"
+                      required
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="polegadas" class="form-label">
+                      Polegadas
+                    </label>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="polegadas"
+                      aria-describedby="polegadas"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 d-block">
+                    Confirmar Cadastro
+                  </button>
+                </form>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modalBicicleta">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Nova Bicileta</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="modeloBike" class="form-label">Modelo</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="modeloBike"
+                      aria-describedby="modeloBike"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="fabricanteBike" class="form-label">
+                      Fabricante
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="fabricanteBike"
+                      aria-describedby="fabricanteBike"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="priceBike" class="form-label">Preço</label>
+                    <div class="input-group">
+                      <span class="input-group-text" id="priceBikeCurrency">
+                        R$
+                      </span>
+                      <input
+                        type="number"
+                        class="form-control form-control-lg"
+                        id="priceBike"
+                        aria-describedby="priceBikeCurrency"
+                        required
+                      />
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="aro" class="form-label">Tamanho do aro</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="aro"
+                      aria-describedby="aro"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 d-block">
+                    Confirmar Cadastro
+                  </button>
+                </form>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modalCelular">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Novo Celular</h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="modeloCellphone" class="form-label"
+                      >Modelo</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="modeloCellphone"
+                      aria-describedby="modeloCellphone"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="fabricanteCellphone" class="form-label">
+                      Fabricante
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="fabricanteCellphone"
+                      aria-describedby="fabricanteCellphone"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label for="priceCellphone" class="form-label">Preço</label>
+                    <div class="input-group">
+                      <span
+                        class="input-group-text"
+                        id="priceCellphoneCurrency"
+                      >
+                        R$
+                      </span>
+                      <input
+                        type="number"
+                        class="form-control form-control-lg"
+                        id="priceCellphone"
+                        aria-describedby="priceCellphoneCurrency"
+                        required
+                      />
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="memory" class="form-label">Memória</label>
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="memory"
+                      aria-describedby="memory"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 d-block">
+                    Confirmar Cadastro
+                  </button>
+                </form>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../dist/main.js"></script>
+  </body>
+</html>
