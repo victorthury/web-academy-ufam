@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Clientes {
+  cpf String @db.Char(11) @id
+  nome String
+  celular String @db.VarChar(14)
+  dataDeNascimento DateTime
+  enderecos Enderecos[]
+  compras Compra[]
+}
+
+model Enderecos {
+  id Int @id @default(autoincrement())
+  cep String @db.Char(8)
+  rua String
+  numero String @db.VarChar(10)
+  bairro String
+  cidade String
+  estado String @db.Char(2)
+  cpfCliente String @db.Char(11)
+  cliente Clientes @relation(fields: [cpfCliente], references: [cpf])
+  compras Compra[]
+}
+
+model Compra {
+  id Int @id @default(autoincrement())
+  desconto Int @db.UnsignedSmallInt
+  formaDePagamento String
+  cpfCliente String @db.Char(11)
+  cliente Clientes @relation(fields: [cpfCliente], references: [cpf])
+  idEndereco Int
+  endereco Enderecos @relation(fields: [idEndereco], references: [id])
+  itemCompra ItemCompra[]
+}
+
+model Categoria {
+  id Int @id @default(autoincrement())
+  nome String
+  subCategoria SubCategoria[]
+}
+
+model SubCategoria {
+  id Int @id @default(autoincrement())
+  nome String
+  categoriaId Int
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
+  produto Produto[]
+}
+
+model Produto {
+  id Int @id @default(autoincrement())
+  fabricante String
+  modelo String
+  precoBase Decimal @db.Decimal(10, 2)
+  qtdDisponivel Int @db.UnsignedSmallInt
+  subCategoriaId Int
+  subCategoria SubCategoria @relation(fields: [subCategoriaId], references: [id])
+  itemCompra ItemCompra[]
+}
+
+model ItemCompra {
+  produtoId Int
+  produto Produto @relation(fields: [produtoId], references: [id])
+  compraId Int
+  compra Compra @relation(fields: [compraId], references: [id])
+  quatidade Int @db.UnsignedTinyInt
+
+  @@id([produtoId, compraId])
+}
