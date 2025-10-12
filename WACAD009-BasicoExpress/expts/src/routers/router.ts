@@ -1,47 +1,20 @@
-import { Router, Request, Response } from 'express';
-import generateLoremByParagraphs from '../utils/lorem';
+import { Router } from 'express';
+import controller from '../controllers/main';
+
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('Página principal do site');
-});
+router.get('/', controller.index);
 
-router.get('/about', (req: Request, res: Response) => {
-  res.send('Página sobre');
-});
+router.get('/about', controller.about);
 
-router.get('/lorem/:paragraphs', (req: Request, res: Response) => {
-  const paragraphs = req.params.paragraphs ?? '5';
-  const result = generateLoremByParagraphs(parseInt(paragraphs));
-  res.send(result);
-});
+router.get('/lorem/:paragraphs', controller.lorem);
 
-router.get('/hb1', (req: Request, res: Response) => {
-  res.render('hb1', {
-    poweredByNodejs: true,
-    name: 'Express',
-    type: 'Framework',
-    layout: false,
-  });
-});
+router.get('/hb1', controller.hb1);
 
-router.get('/hb2', (req: Request, res: Response) => {
-  res.render('hb2', {
-    poweredByNodejs: true,
-    name: 'Express',
-    type: 'Framework',
-    layout: false,
-  });
-});
+router.get('/hb2', controller.hb2);
 
-router.get('/hb3', (req: Request, res: Response) => {
-  const profes = [
-    { nome: 'David Fernandes', sala: 1238 },
-    { nome: 'Horácio Fernandes', sala: 1233 },
-    { nome: 'Edleno Moura', sala: 1236 },
-    { nome: 'Elaine Harada', sala: 1231 },
-  ];
-  res.render('hb3', { profes, layout: false });
-});
+router.get('/hb3', controller.hb3);
+
+router.get('/hb4', controller.hb4);
 
 export default router;

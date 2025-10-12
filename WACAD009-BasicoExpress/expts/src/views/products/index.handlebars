@@ -1,0 +1,43 @@
+<div class='d-flex align-items-center justify-content-between'>
+  <h4>Listagem de produtos</h4>
+  <a href='/products/create'>
+    <i class='bi bi-plus-square-fill'></i>
+  </a>
+</div>
+
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th scope='col'>Nome</th>
+      <th scope='col'>Preço</th>
+      <th scope='col'>Estoque</th>
+      <th scope='col' class='text-end'>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>{{stock}}</td>
+        <td class='d-flex align-items-center justify-content-end'>
+          <form action='/products/read/{{id}}' class='mx-2'>
+            <button type='submit' class='btn btn-primary'>
+              <i class='bi bi-eye'></i>
+            </button>
+          </form>
+          <form action='/products/update/{{id}}' class='mx-2'>
+            <button type='submit' class='btn btn-warning'>
+              <i class='bi bi-pencil'></i>
+            </button>
+          </form>
+          <form action='/products/{{id}}' method='post' class='mx-2'>
+            <button type='submit' class='btn btn-danger'>
+              <i class='bi bi-trash'></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

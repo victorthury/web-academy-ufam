@@ -1,0 +1,49 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-6'>
+
+      <div class='d-flex align-items-center justify-content-between'>
+        <h4>Atualizar Produto</h4>
+        <a href='/products'>
+          <i class='bi bi-arrow-left'></i>
+        </a>
+      </div>
+      <form action='/products/update/{{product.id}}' method='POST'>
+        <div class='mb-3'>
+          <label for='name' class='form-label'>Nome</label>
+          <input
+            type='text'
+            class='form-control'
+            id='name'
+            name='name'
+            required
+            value='{{product.name}}'
+          />
+        </div>
+        <div class='mb-3'>
+          <label for='price' class='form-label'>Preço</label>
+          <input
+            type='text'
+            class='form-control'
+            id='price'
+            name='price'
+            required
+            value='{{product.price}}'
+          />
+        </div>
+        <div class='mb-3'>
+          <label for='stock' class='form-label'>Estoque</label>
+          <input
+            type='text'
+            class='form-control'
+            id='stock'
+            name='stock'
+            required
+            value='{{product.stock}}'
+          />
+        </div>
+        <button type='submit' class='btn btn-primary'>Atualizar Produto</button>
+      </form>
+    </div>
+  </div>
+</div>
