@@ -1,13 +1,15 @@
-GET http://localhost:5001/v1/products
+@hostname = http://localhost:5001
+
+GET {{hostname}}/v1/products
 content-type: application/json
 
 ###
 
-GET http://localhost:5001/v1/products/0
+GET {{hostname}}/v1/products/0
 
 ###
 
-POST http://localhost:5001/v1/products
+POST {{hostname}}/v1/products
 content-type: application/json
 
 {
@@ -18,7 +20,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5001/v1/products/0
+PUT {{hostname}}/v1/products/0
 content-type: application/json
 
 {
@@ -29,6 +31,6 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:5001/v1/products/0
+DELETE {{hostname}}/v1/products/0
 
 ###

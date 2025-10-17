@@ -1,10 +1,11 @@
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-}
+import { Product } from '@prisma/client';
 
-export type CreateProductDTO = Pick<Product, 'name' | 'price' | 'stock'>;
+export type CreateProductDTO = Pick<
+  Product,
+  'name' | 'price' | 'stockQuantity'
+>;
 
-export type UpdateProductDTO = Pick<Product, 'name' | 'price' | 'stock'>;
+export type UpdateProductDTO = Pick<
+  Product,
+  'name' | 'price' | 'stockQuantity'
+>;

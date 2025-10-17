@@ -1,56 +1,90 @@
 import { Request, Response } from 'express';
-import productsService from './products.service';
 import { CreateProductDTO } from './products.types';
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
-const index = (req: Request, res: Response) => {
-  const products = productsService.list();
+import productsService from './products.service';
 
-  res.status(200).json({ products });
-};
-
-const read = (req: Request, res: Response) => {
-  const id = req.params.id as string;
-  const product = productsService.get(parseInt(id));
-
-  if (!product) {
-    res.status(404).json({ message: `O produto com id ${id} não existe` });
+const index = async (req: Request, res: Response) => {
+  try {
+    const products = await productsService.list();
+    res.status(StatusCodes.OK).json({ products });
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
-
-  res.status(200).json({ product });
 };
 
-const create = (req: Request, res: Response) => {
+const read = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+
+  try {
+    const product = await productsService.getById(id);
+
+    if (!product) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: `O produto com id ${id} não existe` });
+      return;
+    }
+
+    res.status(StatusCodes.OK).json({ product });
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+};
+
+const create = async (req: Request, res: Response) => {
   const product = req.body as CreateProductDTO;
 
-  const productCreate = productsService.create(product);
-
-  res.json(productCreate);
+  try {
+    if (await productsService.nameAlreadyExists(product.name)) {
+      res.status(StatusCodes.CONFLICT).send(ReasonPhrases.CONFLICT);
+      return;
+    }
+    const newProduct = await productsService.create(product);
+    res.status(StatusCodes.CREATED).json(newProduct);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
 };
 
-const update = (req: Request, res: Response) => {
+const update = async (req: Request, res: Response) => {
   const id = req.params.id as string;
   const product = req.body as CreateProductDTO;
 
-  const productUpdate = productsService.update(parseInt(id), product);
+  try {
+    if (!(await productsService.idExists(id))) {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: `O produto com id ${id} não existe` });
+      return;
+    }
 
-  if (!productUpdate) {
-    res.status(404).json({ message: `O produto com id ${id} não existe` });
+    const productUpdate = await productsService.update(id, product);
+
+    res.status(StatusCodes.OK).json({ product: productUpdate });
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
-  res.status(200).json({ product });
 };
 
-const remove = (req: Request, res: Response) => {
+const remove = async (req: Request, res: Response) => {
   const id = req.params.id as string;
-  const isDeleted = productsService.remove(parseInt(id));
 
-  if (!isDeleted) {
-    res.status(404).json({
-      message: `O produto com id ${id} não foi deletado, pois não existe`,
-    });
+  try {
+    if (!(await productsService.idExists(id))) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: `O produto com id ${id} não foi deletado, pois não existe`,
+      });
+    }
+
+    await productsService.remove(id);
+
+    res
+      .status(StatusCodes.OK)
+      .json({ message: `O produto com id ${id} foi deletado com sucesso` });
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
-  res
-    .status(200)
-    .json({ message: `O produto com id ${id} foi deletado com sucesso` });
 };
 
 export default { index, read, create, update, remove };

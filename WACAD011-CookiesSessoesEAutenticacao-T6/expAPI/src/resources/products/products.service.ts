@@ -1,39 +1,76 @@
-import { CreateProductDTO, Product } from './products.types';
+import { CreateProductDTO } from './products.types';
+import { PrismaClient, Product } from '@prisma/client';
 
-const products: Product[] = [];
+const prisma = new PrismaClient();
 
-function list() {
+async function list(): Promise<Product[]> {
+  const products: Product[] = await prisma.product.findMany();
   return products;
 }
 
-function get(id: number) {
-  return products.find((product) => product.id === id);
+async function getById(id: string): Promise<Product | null> {
+  const product: Product | null = await prisma.product.findFirst({
+    where: { id },
+  });
+
+  return product;
 }
 
-function create(product: CreateProductDTO) {
-  const productCreate = { id: products.length, ...product };
-  products.push(productCreate);
-  return productCreate;
-}
-
-function update(id: number, updatedData: CreateProductDTO) {
-  const index = products.findIndex((product) => product.id === id);
-  if (index === -1 || !products[index]) {
-    return null;
-  }
-
-  products[index] = { id: products[index].id, ...updatedData };
-  return products[index];
-}
-
-function remove(id: number) {
-  const index = products.findIndex((product) => product.id === id);
-  if (index === -1) {
+async function nameAlreadyExists(name: string): Promise<boolean> {
+  const product: Product | null = await prisma.product.findFirst({
+    where: { name },
+  });
+  if (!product) {
     return false;
   }
-
-  products.splice(index, 1);
   return true;
 }
 
-export default { list, get, create, update, remove };
+async function idExists(id: string): Promise<boolean> {
+  const product: Product | null = await prisma.product.findFirst({
+    where: { id },
+  });
+  if (!product) {
+    return false;
+  }
+
+  return true;
+}
+
+async function create(product: CreateProductDTO): Promise<Product> {
+  const createdProduct: Product = await prisma.product.create({
+    data: product,
+  });
+  return createdProduct;
+}
+
+async function update(
+  id: string,
+  updatedData: CreateProductDTO,
+): Promise<Product> {
+  const product: Product = await prisma.product.update({
+    where: { id },
+    data: { ...updatedData },
+  });
+
+  return product;
+}
+
+async function remove(id: string): Promise<Product> {
+  const deleteProduct: Product = await prisma.product.delete({
+    where: {
+      id,
+    },
+  });
+  return deleteProduct;
+}
+
+export default {
+  list,
+  getById,
+  create,
+  update,
+  remove,
+  nameAlreadyExists,
+  idExists,
+};
