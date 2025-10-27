@@ -12,4 +12,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # comandos executados
 # docker build -t mapeando-portas --build-arg PORTA_ARG=7000 .
-# docker run -d --name exercicio-1 -p 8000:7000 mapeando-portas
+# docker run -d --name exercicio-1 -p 7000:80 mapeando-portas

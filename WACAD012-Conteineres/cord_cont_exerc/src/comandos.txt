@@ -1,0 +1,7 @@
+docker network create net-app
+
+docker build -t back-app -f dockerfile.back . 
+docker run -d --name backend-webacademy --network net-app -p 4000:4000 back-app
+
+docker build -t front-app -f dockerfile.front .
+docker run --name frontend-webacademy --network net-app -p 3000:3000 front-app

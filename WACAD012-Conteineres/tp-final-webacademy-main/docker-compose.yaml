@@ -1,0 +1,60 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=senhasegura
+      - MYSQL_DATABASE=livraria
+    volumes:
+      - volume_db:/var/lib/mysql
+      - ./bd:/docker-entrypoint-initdb.d
+    networks:
+      - rede_tp_final
+
+  dbguicontainer:
+    container_name: dbguicontainer
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=senhasegura
+    depends_on:
+      - mysql
+    networks:
+      - rede_tp_final
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - 4444:4444
+    networks:
+      - rede_tp_final
+    depends_on:
+      - mysql
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+    networks:
+      - rede_tp_final
+    depends_on:
+      - backend
+
+networks:
+  rede_tp_final:
+    driver: bridge
+
+volumes:
+  volume_db:
