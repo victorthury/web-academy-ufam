@@ -1,20 +1,39 @@
+import { ItemCarrinhoType } from "@/app/types/carrinhos";
 import React from "react";
 
-export default function ItemCarrinho() {
+interface ItemCarrinhoProps {
+  itemCarrinho: ItemCarrinhoType;
+  removerItemCarrinho: (id: string) => void;
+}
+
+export default function ItemCarrinho({
+  itemCarrinho,
+  removerItemCarrinho,
+}: ItemCarrinhoProps) {
   const valorTotalProduto = (
     precoUnitario: number,
     quantidade: number
   ): number => precoUnitario * quantidade;
 
   return (
-    <tr key="1">
-      <td>Notebook 1</td>
-      <td>R$ {(1500).toFixed(2)}</td>
-      <td>2</td>
+    <tr key={itemCarrinho.id}>
+      <td>{itemCarrinho.nome}</td>
+      <td>R$ {itemCarrinho.preco.toFixed(2)}</td>
+      <td>{itemCarrinho.quantidade}</td>
 
-      <td>R$ {valorTotalProduto(1500, 2).toFixed(2)}</td>
       <td>
-        <button className="btn btn-danger btn-sm">Remover</button>
+        R${" "}
+        {valorTotalProduto(itemCarrinho.preco, itemCarrinho.quantidade).toFixed(
+          2
+        )}
+      </td>
+      <td>
+        <button
+          onClick={() => removerItemCarrinho(itemCarrinho.id)}
+          className="btn btn-danger btn-sm"
+        >
+          Remover
+        </button>
       </td>
     </tr>
   );

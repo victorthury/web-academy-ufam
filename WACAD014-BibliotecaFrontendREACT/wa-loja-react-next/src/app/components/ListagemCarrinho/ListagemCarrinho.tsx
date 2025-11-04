@@ -1,7 +1,16 @@
 import React from "react";
 import ItemCarrinho from "../ItemCarrinho/ItemCarrinho";
+import { ItemCarrinhoType } from "@/app/types/carrinhos";
 
-export default function ListagemCarrinho() {
+interface ListagemCarrinhoProps {
+  itensCarrinho: ItemCarrinhoType[];
+  removerItemCarrinho: (id: string) => void;
+}
+
+export default function ListagemCarrinho({
+  itensCarrinho,
+  removerItemCarrinho,
+}: ListagemCarrinhoProps) {
   return (
     <div className="card mb-4">
       <div className="row card-body">
@@ -18,9 +27,13 @@ export default function ListagemCarrinho() {
               </tr>
             </thead>
             <tbody>
-              <ItemCarrinho />
-              <ItemCarrinho />
-              <ItemCarrinho />
+              {itensCarrinho.map((item) => (
+                <ItemCarrinho
+                  key={item.id}
+                  itemCarrinho={item}
+                  removerItemCarrinho={removerItemCarrinho}
+                />
+              ))}
             </tbody>
           </table>
         </div>
