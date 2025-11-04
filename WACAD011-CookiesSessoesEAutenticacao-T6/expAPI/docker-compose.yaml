@@ -1,0 +1,35 @@
+services:
+  mysql-loja:
+    container_name: mysql-loja
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=senhasegura
+      - MYSQL_DATABASE=loja
+    volumes:
+      - mysql-volume-loja:/var/lib/mysql
+    networks:
+      - network-loja
+
+  phpmyadmin-loja:
+    container_name: phpmyadmin-loja
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=mysql-loja
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=senhasegura
+    depends_on:
+      - mysql-loja
+    networks:
+      - network-loja
+
+networks:
+  network-loja:
+    driver: bridge
+
+volumes:
+  mysql-volume-loja:

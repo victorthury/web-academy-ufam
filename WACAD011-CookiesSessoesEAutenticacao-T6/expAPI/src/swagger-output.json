@@ -1,0 +1,515 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API da Loja virtual",
+    "description": "Documentação da API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/v1/products/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Lista todos os produtos do banco de dados.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Retorna um array de produtos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/definitions/Product"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Cria um novo produto no banco de dados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateProductDTO"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "O produto foi criado com sucesso no banco de dados.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "409": {
+            "description": "O produto já existe no banco de dados."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Lê um produto cadastrado no banco de dados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "O id de um produto cadastrado no banco de dados"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorno do produto",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "404": {
+            "description": "O produto não existe no bancos de dados"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Cria um novo produto no banco de dados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do produto"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateProductDTO"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "O produto foi criado com sucesso no banco de dados.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "409": {
+            "description": "O produto já existe no banco de dados."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Remove produto dado id do banco de dados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do produto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna se o produto foi removido ou não",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "O produto com id 84afdc12-aca3-4844-ae86-5b7a0349d29a foi deletado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/language/": {
+      "put": {
+        "tags": [
+          "Language"
+        ],
+        "summary": "Configura o cookie de idioma.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lang": {
+                  "type": "string",
+                  "example": "pt-BR"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "O produto foi criado com sucesso no banco de dados.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lang": {
+                  "type": "string",
+                  "example": "pt-BR"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Lista todos os usuários do banco de dados.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Retorna um array de usuários",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/definitions/CreateUserDTO"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Lê um usuário cadastrado no banco de dados.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "O id de um usuário cadastrado no banco de dados"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorno do usuário",
+            "schema": {
+              "$ref": "#/definitions/CreateUserDTO"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/auth/logout": {
+      "delete": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/cart/": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/purchases/": {
+      "post": {
+        "tags": [
+          "Purchase"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateProductDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Mesa"
+        },
+        "price": {
+          "type": "number",
+          "example": 200.89
+        },
+        "stock": {
+          "type": "number",
+          "example": 10
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "efde3166-8e8a-4240-a761-c4dbe80a9215"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mesa"
+        },
+        "price": {
+          "type": "number",
+          "example": 200.89
+        },
+        "stock": {
+          "type": "number",
+          "example": 10
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2025-10-25T14:09:10.030Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2025-10-25T14:09:10.030Z"
+        }
+      }
+    },
+    "CreateUserDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "b68d8481-0015-42ec-a743-d24f73221150"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mrs. Faye Parisian"
+        },
+        "email": {
+          "type": "string",
+          "example": "Gracie64@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2b$10$E1RZ1Y3abUcJdIbAR6wYSuuhFrJU1Rt.Pf5h2mChoP.e.qdrSSmQ2"
+        },
+        "userTypeId": {
+          "type": "string",
+          "example": "2588d064-6935-451d-b31a-2523b97d26fd"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2025-10-25T14:09:10.030Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2025-10-25T14:09:10.030Z"
+        }
+      }
+    }
+  }
+}
