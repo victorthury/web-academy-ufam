@@ -24,13 +24,41 @@ const doc = {
       updatedAt: '2025-10-25T14:09:10.030Z'
     },
     CreateUserDTO: {
-      id: 'b68d8481-0015-42ec-a743-d24f73221150',
-      name: 'Mrs. Faye Parisian',
-      email: 'Gracie64@gmail.com',
-      password: '$2b$10$E1RZ1Y3abUcJdIbAR6wYSuuhFrJU1Rt.Pf5h2mChoP.e.qdrSSmQ2',
+      email: 'admin@gmail.com',
+      name: 'admin',
+      password: 'minhasenha',
+      userTypeId: 'a87fd6d5-80d5-47ea-88c7-098cb4eb05e7'
+    },
+    User: {
+      id: '31ac9126-451d-49dc-8a38-40707eb36f15',
+      name: 'admin',
+      email: 'admin@gmail.com',
+      password: '$2b$10$S67DsZZtmCJwxtx/3NT0l.mOUYjIX0yUUPzKFnOrkO63V1jjrQF3G',
+      userTypeId: 'a87fd6d5-80d5-47ea-88c7-098cb4eb05e7',
+      createdAt: '2025-11-02T13:14:39.354Z',
+      updatedAt: '2025-11-02T13:14:39.354Z'
+    },
+    SignUp: {
+      name: 'Cliente',
+      email: 'cliente@gmail.com',
+      password: 'minhasenha'
+    },
+    SignUpUser: {
+      id: 'ea4bcee3-64d1-4b0c-a853-e8c764629325',
+      name: 'Cliente',
+      email: 'cliente@gmail.com',
+      password: '$2b$10$tiJ.rw/P1o0r9M1UXHuz/.NrbSwJ4RRbnZOCH7uPIGvaoYZRnKIgy',
       userTypeId: '2588d064-6935-451d-b31a-2523b97d26fd',
-      createdAt: '2025-10-25T14:09:10.030Z',
-      updatedAt: '2025-10-25T14:09:10.030Z'
+      createdAt: '2025-11-02T13:09:54.857Z',
+      updatedAt: '2025-11-02T13:09:54.857Z'
+    },
+    Login: {
+      email: 'kleber_admin@gmail.com',
+      password: 'minhasenha'
+    },
+    AddPurchaseItemDTO: {
+      productId: 'caf2117f-a51b-452a-ace4-d86d06a0e1d3',
+      quantity: 8
     }
   }
 };

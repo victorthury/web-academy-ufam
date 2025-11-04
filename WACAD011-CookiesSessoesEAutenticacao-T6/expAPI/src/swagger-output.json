@@ -237,7 +237,7 @@
                   "example": "array"
                 },
                 "items": {
-                  "$ref": "#/definitions/CreateUserDTO"
+                  "$ref": "#/definitions/User"
                 }
               },
               "xml": {
@@ -254,24 +254,31 @@
         "tags": [
           "Users"
         ],
+        "summary": "Cria um novo usuário no banco de dados.",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Dados do novo usuário a ser criado",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CreateUserDTO"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "O usuário foi criado com sucesso no banco de dados.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "409": {
+            "description": "O usuário já existe no banco de dados."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -296,8 +303,14 @@
           "200": {
             "description": "Retorno do usuário",
             "schema": {
-              "$ref": "#/definitions/CreateUserDTO"
+              "$ref": "#/definitions/User"
             }
+          },
+          "404": {
+            "description": "O usuário não existe no bancos de dados"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       },
@@ -305,18 +318,37 @@
         "tags": [
           "Users"
         ],
+        "summary": "Atualiza os dados de um usuário existente.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Id do usuário"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserDTO"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "O usuário foi atualizado com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "O usuário não existe no banco de dados."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       },
@@ -324,18 +356,38 @@
         "tags": [
           "Users"
         ],
+        "summary": "Remove um usuário do banco de dados dado o seu id.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Id do usuário"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Usuário removido com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "OK"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "O usuário não existe no banco de dados."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -345,24 +397,31 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Cria um novo usuário do tipo cliente (sign up).",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
+            "description": "Dados necessários para o cadastro de um novo usuário.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/SignUp"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Usuário criado com sucesso.",
+            "schema": {
+              "$ref": "#/definitions/SignUpUser"
+            }
+          },
+          "409": {
+            "description": "O e-mail informado já está cadastrado no sistema."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -372,10 +431,28 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Realiza o login de um usuário.",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Credenciais do usuário para autenticação.",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Login realizado com sucesso."
+          },
+          "401": {
+            "description": "Credenciais inválidas ou usuário não autorizado."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -385,10 +462,14 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Realiza o logout do usuário autenticado e encerra a sessão.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Logout realizado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno ao encerrar a sessão."
           }
         }
       }
@@ -398,10 +479,29 @@
         "tags": [
           "Cart"
         ],
+        "summary": "Lista todos os itens atualmente no carrinho de compras.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Retorna o array de itens do carrinho.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/definitions/AddPurchaseItemDTO"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       },
@@ -409,10 +509,41 @@
         "tags": [
           "Cart"
         ],
+        "summary": "Adiciona um novo item ao carrinho de compras.",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Item a ser adicionado ao carrinho.",
+            "schema": {
+              "$ref": "#/definitions/AddPurchaseItemDTO"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Item adicionado com sucesso ao carrinho.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "OK"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -422,10 +553,17 @@
         "tags": [
           "Purchase"
         ],
+        "summary": "Finaliza a compra dos itens presentes no carrinho.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Compra realizada com sucesso."
+          },
+          "422": {
+            "description": "Não é possível finalizar a compra pois o carrinho está vazio."
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -481,21 +619,92 @@
     "CreateUserDTO": {
       "type": "object",
       "properties": {
-        "id": {
+        "email": {
           "type": "string",
-          "example": "b68d8481-0015-42ec-a743-d24f73221150"
+          "example": "admin@gmail.com"
         },
         "name": {
           "type": "string",
-          "example": "Mrs. Faye Parisian"
-        },
-        "email": {
-          "type": "string",
-          "example": "Gracie64@gmail.com"
+          "example": "admin"
         },
         "password": {
           "type": "string",
-          "example": "$2b$10$E1RZ1Y3abUcJdIbAR6wYSuuhFrJU1Rt.Pf5h2mChoP.e.qdrSSmQ2"
+          "example": "minhasenha"
+        },
+        "userTypeId": {
+          "type": "string",
+          "example": "a87fd6d5-80d5-47ea-88c7-098cb4eb05e7"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "31ac9126-451d-49dc-8a38-40707eb36f15"
+        },
+        "name": {
+          "type": "string",
+          "example": "admin"
+        },
+        "email": {
+          "type": "string",
+          "example": "admin@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2b$10$S67DsZZtmCJwxtx/3NT0l.mOUYjIX0yUUPzKFnOrkO63V1jjrQF3G"
+        },
+        "userTypeId": {
+          "type": "string",
+          "example": "a87fd6d5-80d5-47ea-88c7-098cb4eb05e7"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2025-11-02T13:14:39.354Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2025-11-02T13:14:39.354Z"
+        }
+      }
+    },
+    "SignUp": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Cliente"
+        },
+        "email": {
+          "type": "string",
+          "example": "cliente@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "minhasenha"
+        }
+      }
+    },
+    "SignUpUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "ea4bcee3-64d1-4b0c-a853-e8c764629325"
+        },
+        "name": {
+          "type": "string",
+          "example": "Cliente"
+        },
+        "email": {
+          "type": "string",
+          "example": "cliente@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2b$10$tiJ.rw/P1o0r9M1UXHuz/.NrbSwJ4RRbnZOCH7uPIGvaoYZRnKIgy"
         },
         "userTypeId": {
           "type": "string",
@@ -503,11 +712,37 @@
         },
         "createdAt": {
           "type": "string",
-          "example": "2025-10-25T14:09:10.030Z"
+          "example": "2025-11-02T13:09:54.857Z"
         },
         "updatedAt": {
           "type": "string",
-          "example": "2025-10-25T14:09:10.030Z"
+          "example": "2025-11-02T13:09:54.857Z"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "kleber_admin@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "minhasenha"
+        }
+      }
+    },
+    "AddPurchaseItemDTO": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "caf2117f-a51b-452a-ace4-d86d06a0e1d3"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 8
         }
       }
     }

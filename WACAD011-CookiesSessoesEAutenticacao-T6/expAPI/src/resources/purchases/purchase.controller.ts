@@ -3,6 +3,21 @@ import { createPurchase } from './purchase.service';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
 const purchase = async (req: Request, res: Response) => {
+  /* 
+    #swagger.summary = "Finaliza a compra dos itens presentes no carrinho."
+
+    #swagger.responses[200] = {
+      description: 'Compra realizada com sucesso.'
+    }
+
+    #swagger.responses[422] = {
+      description: 'Não é possível finalizar a compra pois o carrinho está vazio.'
+    }
+
+    #swagger.responses[500] = {
+      description: 'Internal server error'
+    }
+  */
   try {
     if (!req.session?.cart?.length) {
       res
