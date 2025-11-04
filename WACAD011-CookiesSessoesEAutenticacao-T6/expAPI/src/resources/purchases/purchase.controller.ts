@@ -29,9 +29,7 @@ const purchase = async (req: Request, res: Response) => {
       res.status(StatusCodes.OK).json(ReasonPhrases.OK);
     }
   } catch (err) {
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
 };
 
