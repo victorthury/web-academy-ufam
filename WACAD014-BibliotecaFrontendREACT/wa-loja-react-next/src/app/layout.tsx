@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Navbar from "./components/Navbar/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import BootstrapClient from "./components/BootstrapClient";
+import { ReactQueryClientProvider } from "./components/ReactQueryClient";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +19,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <Navbar />
-        {children}
+        <ReactQueryClientProvider>
+          <Navbar />
+          {children}
+          <ToastContainer />
+          <BootstrapClient />
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

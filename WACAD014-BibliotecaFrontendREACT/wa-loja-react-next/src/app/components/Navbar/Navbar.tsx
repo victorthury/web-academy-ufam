@@ -1,8 +1,12 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  if (pathname === "/login" || pathname === "/cadastro") return null;
+
   return (
     <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
       <div className="container-fluid">
@@ -28,13 +32,20 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/carrinho">
+              <Link className="nav-link" href="/carrinho">
                 Carrinho
-              </a>
+              </Link>
+            </li>
+            <li className="nac-item">
+              <Link className="nav-link" href="/favoritos">
+                Favoritos
+              </Link>
             </li>
           </ul>
 
-          <button className="btn btn-dark">Sair</button>
+          <Link href="/login">
+            <button className="btn btn-dark">Sair</button>
+          </Link>
         </div>
       </div>
     </nav>
