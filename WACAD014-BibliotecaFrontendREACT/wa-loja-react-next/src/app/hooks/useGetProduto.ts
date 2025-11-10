@@ -3,7 +3,7 @@ import { getProduto } from "../services/produto";
 
 export function useGetProduto(produto: string) {
   const { data, isPending, isError } = useQuery({
-    queryKey: ["listaProduto"],
+    queryKey: [produto],
     queryFn: () => getProduto(produto),
   });
 
