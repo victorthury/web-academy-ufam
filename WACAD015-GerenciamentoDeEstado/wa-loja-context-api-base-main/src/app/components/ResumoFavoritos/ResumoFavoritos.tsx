@@ -1,9 +1,8 @@
-import { useContext } from "react";
+import { useFavoritosContext } from "@/app/State/FavoritosProvider";
 import CardProduto from "../CardProduto/CardProduto";
-import { FavoritosContext } from "@/app/State/FavoritosProvider";
 
 export default function ResumoFavoritos() {
-  const { favoritos } = useContext(FavoritosContext);
+  const { favoritos } = useFavoritosContext();
 
   const ultimosFavoritos = favoritos.slice(-3).reverse();
 

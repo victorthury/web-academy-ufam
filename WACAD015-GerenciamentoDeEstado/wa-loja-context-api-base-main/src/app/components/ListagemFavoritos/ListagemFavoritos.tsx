@@ -1,4 +1,4 @@
-import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
+import { useValorTotalFavoritos } from "@/app/State/FavoritosProvider";
 import ItemFavorito from "../ItemFavorito/ItemFavorito";
 
 interface IListagemFavoritosProps {
@@ -10,15 +10,7 @@ export default function ListagemFavoritos({
   produtosFavoritos,
   setFavoritos,
 }: IListagemFavoritosProps) {
-  const valorTotalFavoritos = produtosFavoritos.reduce((acc, produto) => {
-    return (
-      acc +
-      calculaValorComPorcentagemDeDesconto(
-        Number(produto.preco),
-        produto.desconto
-      )
-    );
-  }, 0);
+  const valorTotalFavoritos = useValorTotalFavoritos();
 
   return (
     <div className="card mb-4">

@@ -1,4 +1,5 @@
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
+import { useRemoveProdutoFavorito } from "@/app/State/FavoritosProvider";
 import Image from "next/image";
 
 interface IItemFavoritoProps {
@@ -6,13 +7,8 @@ interface IItemFavoritoProps {
   setFavoritos: React.Dispatch<React.SetStateAction<Produto[]>>;
 }
 
-export default function ItemFavorito({
-  itemFavorito,
-  setFavoritos,
-}: IItemFavoritoProps) {
-  const removerFavorito = (id: string) => {
-    setFavoritos((favoritos) => favoritos.filter((item) => item.id !== id));
-  };
+export default function ItemFavorito({ itemFavorito }: IItemFavoritoProps) {
+  const removerFavorito = useRemoveProdutoFavorito();
 
   return (
     <tr key={itemFavorito.id}>

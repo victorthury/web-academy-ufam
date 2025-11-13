@@ -1,7 +1,9 @@
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
-import { FavoritosContext } from "@/app/State/FavoritosProvider";
+import {
+  useAddProdutoFavorito,
+  useProdutoFavorito,
+} from "@/app/State/FavoritosProvider";
 import Image from "next/image";
-import { useContext } from "react";
 
 interface CardProdutoProps {
   produto: Produto;
@@ -14,13 +16,9 @@ export default function CardProduto({
   mostrarImagem = true,
   mostrarBotao = true,
 }: CardProdutoProps) {
-  const { favoritos, setFavoritos } = useContext(FavoritosContext);
+  const adicionarAosFavoritos = useAddProdutoFavorito();
 
-  const adicionarAosFavoritos = (produto: Produto) => {
-    setFavoritos((favoritos) => [...favoritos, produto]);
-  };
-
-  const ehFavorito = favoritos.some((item) => item.id === produto.id);
+  const ehFavorito = useProdutoFavorito(produto.id);
 
   return (
     <div className="col">
