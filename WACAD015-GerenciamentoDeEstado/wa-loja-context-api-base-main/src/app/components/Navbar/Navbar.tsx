@@ -1,8 +1,15 @@
 "use client";
 
+import { useAuthContext } from "@/app/State/AuthProvider";
 import Link from "next/link";
 
 export default function Navbar() {
+  const { email, logout } = useAuthContext();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
       <div className="container-fluid">
@@ -34,11 +41,15 @@ export default function Navbar() {
             </li>
           </ul>
 
-          <Link className="nav-link " href="/login">
-            <button type="button" className="btn btn-secondary">
-              Sair
-            </button>
-          </Link>
+          {email && <span>{email}</span>}
+
+          <button
+            type="button"
+            className="btn btn-secondary ms-2"
+            onClick={handleLogout}
+          >
+            {email ? "Sair" : "Login"}
+          </button>
         </div>
       </div>
     </nav>

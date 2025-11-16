@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { calculaValorComPorcentagemDeDesconto } from "../helpers";
 
 interface IFavoritosContext {
@@ -19,6 +19,14 @@ interface FavoritosProviderProps {
 
 const FavoritosProvider = ({ children }: FavoritosProviderProps) => {
   const [favoritos, setFavoritos] = useState<Produto[]>([]);
+
+  useEffect(() => {
+    const favoritosLocalStorage = localStorage.getItem("favoritos");
+
+    if (favoritosLocalStorage) {
+      setFavoritos(JSON.parse(favoritosLocalStorage));
+    }
+  }, []);
 
   const values = {
     favoritos,
@@ -51,13 +59,16 @@ export const useRemoveProdutoFavorito = () => {
   return (id: string) => {
     const produtosFavoritos = favoritos.filter((item) => item.id !== id);
     setFavoritos(produtosFavoritos);
+    localStorage.setItem("favoritos", JSON.stringify(produtosFavoritos));
   };
 };
 
 export const useAddProdutoFavorito = () => {
-  const { setFavoritos } = useContext(FavoritosContext);
+  const { favoritos, setFavoritos } = useContext(FavoritosContext);
   return (produto: Produto) => {
-    setFavoritos((favoritos) => [...favoritos, produto]);
+    const novosFavoritos = [...favoritos, produto];
+    setFavoritos(novosFavoritos);
+    localStorage.setItem("favoritos", JSON.stringify([...favoritos, produto]));
   };
 };
 
